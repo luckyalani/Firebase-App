@@ -33,15 +33,18 @@
 
         const email = document.getElementById("email").value;
         const pass = document.getElementById("password").value;
-
+        const displayName_new = document.getElementById("username").value;
         // signup database code
-        createUserWithEmailAndPassword(auth, email, pass)
+        createUserWithEmailAndPassword(auth, email, pass,displayName_new)
           .then((userCredential) => {
             // Signed up
             buttonshow();
 
             const user = userCredential.user;
-            // ...
+            let username= userCredential.user.displayName;
+            username=displayName_new;
+
+            console.log(username);
             setTimeout(() => {
               toastshow();
 
@@ -49,7 +52,8 @@
 
             setTimeout(() => {
               // redirect after 2s 
-              window.location.href='welocmepage.html';
+
+             window.location.href = "https://vendor-html.cerbosys.com/admin/dashboard.html";
               
             }, 2000);
           })
@@ -74,8 +78,11 @@
         //  blanking input fields
         const email = document.getElementById("email");
         const pass = document.getElementById("password");
+        const displayName_new = document.getElementById("username");
         email.value = "";
         pass.value = "";
+        displayName_new.value="";
+        
         setTimeout(() => {
           toast.style.display = "none";
         }, 3000);
@@ -90,9 +97,7 @@
     </script>
   </head>
   <body>
-    <!--  -->
-    <!-- component -->
-    <!-- page -->
+<!-- toast code -->
     <div
       id="toast-success"
       class="flex absolute hidden right-[10px] top-3 items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
@@ -139,21 +144,30 @@
         </svg>
       </button>
     </div>
+    <!-- main component code  -->
     <main
     class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white"
   >
     <!-- component -->
     <section class="flex w-auto sm:w-[30%] flex-col space-y-10">
       <div class="text-center text-4xl font-medium">Sign up</div>
+      <input
+      type="text"
+      placeholder="Username"
+      class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
+      id="username"
+    />
       <div
         class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500"
       >
+
         <input
           type="text"
           placeholder="Email or Username"
           class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
           id="email"
         />
+
       </div>
       <div
         class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500"
