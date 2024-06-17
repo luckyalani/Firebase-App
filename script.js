@@ -37,21 +37,16 @@
         //  buttonshow();
 
          const user = userCredential.user;
-        //  let username= userCredential.user.displayName;
-        //  username=displayName_new;
+
 
          console.log(user);
-         setTimeout(() => {
-           toastshow();
 
+
+         toastshow();
+         setTimeout(() => {
+
+          window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";           
          }, 1000);
-
-         setTimeout(() => {
-           // redirect after 2s 
-
-          window.location.href = "https://vendor-html.cerbosys.com/admin/dashboard.html";
-           
-         }, 2000);
        })
        .catch((error) => {
          const errorCode = error.code;
@@ -63,21 +58,21 @@
 
    function toastshow() {
     const toast = document.getElementById("toast-success");
-    const spinner=document.getElementById('spinnerdiv');
-    spinner.style.display='none';
+    // const spinner=document.getElementById('spinnerdiv');
+    // spinner.style.display='none';
     toast.style.display = "flex";
 
     //  blanking input fields
     const email = document.getElementById("email");
     const pass = document.getElementById("password");
-    const displayName_new = document.getElementById("username");
+    // const displayName_new = document.getElementById("username");
     email.value = "";
     pass.value = "";
     // displayName_new.value="";
     
     setTimeout(() => {
       toast.style.display = "none";
-    }, 3000);
+    }, 2000);
   }
 
  
@@ -91,10 +86,11 @@ signInWithPopup(auth, provider)
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
-    // The signed-in user info.
     const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
+
+    setTimeout(() => {
+       window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";
+    }, 2000);
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
