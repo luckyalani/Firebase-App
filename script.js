@@ -3,8 +3,11 @@
    import {
      getAuth,
      createUserWithEmailAndPassword,
-     signInWithPopup, GoogleAuthProvider
+     signInWithPopup, GoogleAuthProvider,
+     sendEmailVerification,
    } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+   
+   import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
    const firebaseConfig = {
      apiKey: "AIzaSyAy2eEP8dZHFQou8P6-doffppduae_aNf8",
@@ -18,7 +21,6 @@
    // Initialize Firebase
    const app = initializeApp(firebaseConfig);
    const auth = getAuth(app);
-
 
 
 
@@ -39,14 +41,54 @@
          const user = userCredential.user;
 
 
-         console.log(user);
+        //  console.log(user);
+      //    const sendemail=async()=>{
+
+      // const emailverify= await sendEmailVerification(auth.currentUser);  
+      
+    
+      // alert("email sent")
+      //     console.log(auth.currentUser.emailVerified)
+
+      //     onAuthStateChanged(auth, (currentUser) => {
+      //       if (currentUser.emailVerified==true) {
+      //           //  window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";
+      //        console.log("ho gaya")
+      //       } else {
+             
+      //         // alert("user")
+      //         return null;
+
+      //       }
+      //     });
+      //   }
+      
+      sendEmailVerification(auth.currentUser)
+      .then(() => {
+            alert("email sent")
+   window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";
+      })
+      .catch((error) => {
+        alert(error.message);
+      })
+
+      
+
+       
+
 
 
          toastshow();
          setTimeout(() => {
 
-          window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";           
+          // sendemail();
          }, 1000);
+
+// setTimeout(() => {
+//     setInterval(() => {
+//       checkverifystatus();
+//     }, 1000);
+// },2000);
        })
        .catch((error) => {
          const errorCode = error.code;
@@ -55,7 +97,7 @@
          alert(errorMessage);
        });
    });
-
+   
    function toastshow() {
     const toast = document.getElementById("toast-success");
     // const spinner=document.getElementById('spinnerdiv');
@@ -75,9 +117,28 @@
     }, 2000);
   }
 
- 
+
   const google=document.getElementById('btn1');
   const provider = new GoogleAuthProvider();
+
+  // send email verification password 
+
+
+// checking the email verified status os the user
+const checkingauthstatus=()=>{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+}
+
 
   google.onclick=(e)=>{
     const auth = getAuth();
@@ -88,9 +149,11 @@ signInWithPopup(auth, provider)
     const token = credential.accessToken;
     const user = result.user;
 
+
     setTimeout(() => {
        window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";
-    }, 2000);
+      // sendemail();
+    }, 1000);
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
