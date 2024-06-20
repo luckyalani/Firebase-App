@@ -35,33 +35,12 @@
      // signup database code
      createUserWithEmailAndPassword(auth, email, pass)
        .then((userCredential) => {
-         // Signed up
-        //  buttonshow();
+
 
          const user = userCredential.user;
 
 
-        //  console.log(user);
-      //    const sendemail=async()=>{
 
-      // const emailverify= await sendEmailVerification(auth.currentUser);  
-      
-    
-      // alert("email sent")
-      //     console.log(auth.currentUser.emailVerified)
-
-      //     onAuthStateChanged(auth, (currentUser) => {
-      //       if (currentUser.emailVerified==true) {
-      //           //  window.location.href="https://admin-superduper.cerbosys.com/admin/dashboard.html";
-      //        console.log("ho gaya")
-      //       } else {
-             
-      //         // alert("user")
-      //         return null;
-
-      //       }
-      //     });
-      //   }
       
       sendEmailVerification(auth.currentUser)
       .then(() => {
